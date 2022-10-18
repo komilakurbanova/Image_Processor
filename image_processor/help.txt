@@ -1,0 +1,57 @@
+--------------------------------------------------
+
+
+                  Helper
+
+
+These filters are supposed to be used on 24-bit BMP without compression or color-table.
+
+To start using filters do:
+
+{ program name } { input file path } { output file path } [ - {filter 1 name } [ filter parameter 1] [filter parameter 2 ] ... ] [ - {filter 1 name } [ filter parameter 1 ] [filter parameter 2 ] ... ]
+
+For instance:
+
+./image_processor input.bmp /tmp/output.bmp -crop 800 600 -gs -blur 0.5
+
+Means that:
+
+1) input.bmp will be opened
+2) cropped 800 x 600 from the upper left corner
+3) turned into grayscale
+4) blurred with the given sigma-parameter
+5) saved as /tmp/output.bmp
+If the list of filters is empty, the image will be saved without any changes
+
+
+List of available filters:
+
+ --  Crop ( -crop  width  height )
+
+Crops the image saving the upper left corner. Width and height must be natural numbers (integer and more than zero). If given parameters are bigger than the image's size, the program will show only that pixels that did exist before the crop.
+
+ --  Grayscale ( -gs )
+
+Turns the image into gray shades.
+
+ --  Negative ( -neg )
+
+Turns the image into its negative.
+
+ --  Sharpening ( -sharp )
+
+Sharpens the picture.
+
+ --  Edge Detection ( -edge  threshold )
+
+Detects edges of objects in the image. Threshold is a parameter of filter sensitivity. If a color is bigger than threshold, it is made white. Otherwise, it will be painted black. Threshold must be integer from 0 to 255.
+
+ --  Gaussian Blur ( -blur  sigma )
+
+Blurs the image. The bigger sigma is, the more blurred the image becomes. Sigma can be float but not zero.
+
+ --  Laplacian ( -laplace )
+
+Detects edges by computing the second derivatives of an image, measuring the rate at which the first derivatives change. Should better be used after blur (Gaussian Blur) filter.
+
+--------------------------------------------------
